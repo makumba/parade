@@ -6,6 +6,7 @@ import java.lang.reflect.*;
 import java.util.*;
 import java.util.jar.*;
 import java.util.zip.*;
+import org.makumba.controller.http.*;
 
 public class MakumbaManager
 {
@@ -118,31 +119,7 @@ public class MakumbaManager
 
   public static void response(javax.servlet.jsp.PageContext pageContext)
   {
-// since we cannot catch exceptions in makumba tags, we copy a bit of code 
-    if(pageContext.getRequest().getAttribute("makumba.response")!=null)
-      return;
-    pageContext.getRequest().setAttribute("makumba.response", "");
-    Integer i=FormResponder.responseId(pageContext);
-    if(i==null)
-      return;
-    String s="";
-    FormResponder fr= null;
-    try{
-      fr=FormResponder.getFormResponder(i);
-      Object p=fr.respondTo(pageContext);
-      s="<font color=green>"+fr.getMessage()+"</font>";
-      if(p!=null)
-	pageContext.setAttribute(fr.getSubjectLabel(), p, pageContext.PAGE_SCOPE);
-      pageContext.getRequest().setAttribute("makumba.response", s);
-    }
-    catch(org.makumba.LogicException e){
-      s="<font color=red>"+e.getMessage()+"</font>";
-      pageContext.setAttribute(fr.getSubjectLabel(), org.makumba.Pointer.Null, pageContext.PAGE_SCOPE);
-    }
-    catch(Throwable t){
-	pageContext.setAttribute("makumba.error", t,
-			javax.servlet.jsp.PageContext.REQUEST_SCOPE); 
-    }
+      // Responder.response(pageContext.getRequest(), pageContext.getResponse());
   }
 
   public static void main(String argv[])
