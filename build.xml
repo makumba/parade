@@ -46,6 +46,7 @@
 
 
 	<target name="tomcat" description="start tomcat 4" >
+	<fail message="please use temporarily the command nohup starter.sh &"/>
 	<antcall target="compile" />
 	<!-- copy util-java/lib to tomcat's common, for use by webapps and LoginFilter
 	according to the tomcat classloader howto, should be copied to tomcat's share/classes, 
