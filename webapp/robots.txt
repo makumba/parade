@@ -1,0 +1,8 @@
+# $Header$
+# robots, scram
+# instructions at http://www.robotstxt.org/wc/norobots.html
+
+User-agent: *
+Disallow:   /
+#Disallow:   /cgi-bin
+#Disallow:   /private

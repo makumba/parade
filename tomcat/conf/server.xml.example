@@ -1,0 +1,132 @@
+<!-- Alternate Example-less Configuration File -->
+<!-- Note that component elements are nested corresponding to their
+     parent-child relationships with each other -->
+
+<!-- A "Server" is a singleton element that represents the entire JVM,
+     which may contain one or more "Service" instances.  The Server
+     listens for a shutdown command on the indicated port.
+
+     Note:  A "Server" is not itself a "Container", so you may not
+     define subcomponents such as "Valves" or "Loggers" at this level.
+ -->
+
+<Server port="###RESTART_PORT###" shutdown="SHUTDOWN" debug="0">
+
+  <!-- Global JNDI resources -->
+  <GlobalNamingResources>
+
+    <!-- Test entry for demonstration purposes -->
+    <Environment name="simpleValue" type="java.lang.Integer" value="30"/>
+
+    <!-- Editable user database that can also be used by
+         UserDatabaseRealm to authenticate users -->
+    <Resource name="UserDatabase" auth="Container"
+              type="org.apache.catalina.UserDatabase"
+       description="User database that can be updated and saved">
+    </Resource>
+    <ResourceParams name="UserDatabase">
+      <parameter>
+        <name>factory</name>
+        <value>org.apache.catalina.users.MemoryUserDatabaseFactory</value>
+      </parameter>
+      <parameter>
+        <name>pathname</name>
+        <value>conf/tomcat-users.xml</value>
+      </parameter>
+    </ResourceParams>
+
+  </GlobalNamingResources>
+
+  <!-- A "Service" is a collection of one or more "Connectors" that share
+       a single "Container" (and therefore the web applications visible
+       within that Container).  Normally, that Container is an "Engine",
+       but this is not required.
+
+       Note:  A "Service" is not itself a "Container", so you may not
+       define subcomponents such as "Valves" or "Loggers" at this level.
+   -->
+
+  <!-- Define the Tomcat Stand-Alone Service -->
+  <Service name="Tomcat-Standalone">
+
+    <!-- A "Connector" represents an endpoint by which requests are received
+         and responses are returned.  Each Connector passes requests on to the
+         associated "Container" (normally an Engine) for processing.
+
+         By default, a non-SSL HTTP/1.1 Connector is established on port ###HTTP_PORT###.
+         You can also enable an SSL HTTP/1.1 Connector on port 8443 by
+         following the instructions below and uncommenting the second Connector
+         entry.  SSL support requires the following steps (see the SSL Config
+         HOWTO in the Tomcat 4.0 documentation bundle for more detailed
+         instructions):
+         * Download and install JSSE 1.0.2 or later, and put the JAR files
+           into "$JAVA_HOME/jre/lib/ext".
+         * Execute:
+             %JAVA_HOME%\bin\keytool -genkey -alias tomcat -keyalg RSA (Windows)
+             $JAVA_HOME/bin/keytool -genkey -alias tomcat -keyalg RSA  (Unix)
+           with a password value of "changeit" for both the certificate and
+           the keystore itself.
+
+         By default, DNS lookups are enabled when a web application calls
+         request.getRemoteHost().  This can have an adverse impact on
+         performance, so you can disable it by setting the
+         "enableLookups" attribute to "false".  When DNS lookups are disabled,
+         request.getRemoteHost() will return the String version of the
+         IP address of the remote client.
+    -->
+
+    <!-- Define a non-SSL HTTP/1.1 Connector on port ###HTTP_PORT### -->
+    <Connector className="org.apache.coyote.tomcat4.CoyoteConnector"
+               port="###HTTP_PORT###" minProcessors="5" maxProcessors="75"
+               enableLookups="true" redirectPort="8443"
+               acceptCount="10" debug="0" connectionTimeout="60000"/>
+
+    <!-- An Engine represents the entry point (within Catalina) that processes
+         every request.  The Engine implementation for Tomcat stand alone
+         analyzes the HTTP headers included with the request, and passes them
+         on to the appropriate Host (virtual host). -->
+
+    <!-- Define the top level container in our container hierarchy -->
+    <Engine name="Standalone" defaultHost="localhost" debug="0">
+
+      <DefaultContext crossContext="true"/>
+	
+      <!--
+      <Valve className="org.apache.catalina.valves.RequestDumperValve"/>
+      -->
+
+      <!-- Global logger unless overridden at lower levels -->
+      <Logger className="org.apache.catalina.logger.SystemOutLogger" />
+
+      <!-- Because this Realm is here, an instance will be shared globally -->
+
+      <Realm className="org.apache.catalina.realm.MemoryRealm" />
+
+      <!-- Define the default virtual host -->
+      <Host name="localhost" debug="0" appBase="webapps" 
+       unpackWARs="true" autoDeploy="true">
+
+        <Valve className="org.apache.catalina.valves.AccessLogValve"
+                 directory="logs"  prefix="localhost_access_log." suffix=".txt"
+                 pattern="common"/>
+
+
+      <Logger className="org.apache.catalina.logger.SystemOutLogger" />
+
+	<Context path="" docBase="../../###WEBAPP_PATH###" debug="0" reload="true"/>
+        <Context path="/logs" docBase="../logs" debug="0" reload="false"/>
+
+        <Context path="/manager" docBase="../../###CATALINA_HOME###/server/webapps/manager"
+           debug="0" privileged="true">
+           <!-- Link to the user database we will get roles from -->
+            <ResourceLink name="users" global="UserDatabase"
+                 type="org.apache.catalina.UserDatabase"/>
+         </Context>
+         <Context path="/tomcat-docs" docBase="../../###CATALINA_HOME###/webapps/tomcat-docs" debug="0" reload="false"/>
+         <Context path="/makumba-docs" docBase="../../###TEMP_DIR###/makumba-docs/makumba" reload="false"/>
+      </Host>
+    </Engine>
+
+  </Service>
+</Server>
+

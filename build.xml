@@ -1,0 +1,168 @@
+<!-- $Header$ -->
+<project name="PARADE" default="compile" basedir=".">
+<property file="parade.properties" />
+
+       <path id="project.class.path">	
+	 <pathelement path="../utilities"/>
+       </path>
+
+	<property name="project.class.path" refid="project.class.path" />
+
+	<target name="install" description="install the project. Attempt to install Tomcat from the bundle.">
+	<available file="parade.properties" property="properties.copied" />
+	<copy file="parade.properties.example" toFile="parade.properties" />
+	<fail unless="properties.copied" message="Configure parade.properties and start ant install again!"/>
+	<cvs command="checkout ${generics.cvs}" dest=".."/>
+	<ant antfile="${generics.path}" target="installTomcat"/>
+	<cvs command="update" dest="." />
+	<antcall target="getMakumba" />
+
+	<copy file="${webapp.path}/WEB-INF/classes/MakumbaDatabase.properties.example"
+		 toFile="${webapp.path}/WEB-INF/classes/MakumbaDatabase.properties" />
+	<copy file="servletContext.properties.example"
+		 toFile="servletContext.properties" />
+        <cvs command="checkout utilities/" dest=".." />
+
+	<ant antfile="../utilities/build.xml" target="compile" dir="../utilities"/>
+
+        <cvs command="checkout karamba/public_html/WEB-INF/classes/dataDefinitions" dest=".." />
+	<antcall target="compile"/>
+	<echo message="Installation finished. Execute 'ant -projecthelp' to see what commands are available." />
+	</target>
+
+
+        <target name="applets" description="compiles applets and copies them to the webapp">
+	<antcall target="compile"/>
+	<!-- copy applets to webapp/ -->
+	<copy toDir="webapp/" overwrite="true">
+         <fileset dir="webapp/WEB-INF/classes">
+          <include name="org/makumba/parade/applets/*.class" />
+          <include name="org/makumba/parade/sourceedit/*.class" />
+         </fileset>
+	</copy>
+<echo>Press x in the Java Plugin console to make it forget old applets. If you have no java console, hold Shift while pressing Refresh in the browser.
+</echo>
+	</target>
+
+
+	<target name="tomcat" description="start tomcat 4" >
+	<antcall target="compile" />
+	<!-- copy util-java/lib to tomcat's common, for use by webapps and LoginFilter
+	according to the tomcat classloader howto, should be copied to tomcat's share/classes, 
+	but i couldn't get them to work frmom there.
+	-->
+	<copy toDir="${catalina.home}/common/lib" overwrite="true" >
+         <fileset dir="../../util-java/lib">
+          <include name="*.jar" />
+          <include name="*.zip" />
+	<exclude name="makumba.jar" />
+	<exclude name="antlr.jar" />
+         </fileset>	
+	</copy>
+	<!-- copy utilities to tomcat's common, for use by webapps and LoginFilter
+	according to the tomcat classloader howto, should be copied to tomcat's share/classes, 
+	but i couldn't get them to work frmom there.
+	-->
+	<copy toDir="${catalina.home}/common/classes/org" overwrite="true">
+         <fileset dir="../utilities/org/">
+          <include name="eu/best/tools/*.class" />
+         </fileset>
+	</copy>
+
+
+	<!-- copy dataDefinitions to parade's WEB-INF, for use by AccessServlet	-->
+	<copy toDir="webapp/WEB-INF/classes/dataDefinitions" overwrite="true">
+         <fileset dir="../karamba/public_html/WEB-INF/classes/dataDefinitions">
+          <include name="**/*.mdd" />
+          <include name="**/*.idd" />
+         </fileset>	
+	</copy>
+
+	<!-- copy BestMemberAuthorizer to parade's WEB-INF, for use by AccessServlet	-->
+	<copy toDir="webapp/WEB-INF/classes/org" overwrite="true">
+         <fileset dir="../utilities/org/">
+          <include name="eu/best/BestMemberAuthorizer*.class" />
+         </fileset>
+	</copy>
+
+	<!-- copy applets to webapp/ -->
+	<copy toDir="webapp/" overwrite="true">
+         <fileset dir="webapp/WEB-INF/classes">
+          <include name="org/makumba/parade/applets/*.class" />
+          <include name="org/makumba/parade/sourceedit/*.class" />
+         </fileset>
+	</copy>
+
+	<antcall target="applets" />
+
+	<ant antfile="${generics.path}" target="startTomcat" />
+	</target>
+
+	<target name="stopTomcat" description="stop tomcat 4">
+	<ant antfile="${generics.path}" target="stopTomcat" />
+	</target>
+	
+	<target name="reload" >
+	<antcall target="compile" />
+	<ant antfile="${generics.path}" target="reload" />
+	</target>
+
+        <target name="getMakumba" description="get the lastest makumba JAR. Use this if you see makumba compilation errors!!!" >
+	<ant antfile="${generics.path}" target="getMakumba" />
+        </target>
+
+	<target name="compile" description="compile the java files">
+	<ant antfile="${generics.path}" target="compile" inheritRefs="true"/>
+	</target>
+
+       <target name="clean" description="delete all generated and backup files">
+	<ant antfile="${generics.path}" target="clean"/>
+       </target>
+
+	<target name="maktomcat" description="for Makumba development. Compiles makumba and starts tomcat." >
+	<ant antfile="../makumba/build.xml" target="jar" dir="../makumba"/>
+	<copy file="../makumba/lib/makumba.jar" tofile="webapp/WEB-INF/lib/makumba.jar" overwrite="true" />
+	<antcall target="tomcat" />
+	</target>
+
+	<target name= "jcvstest" depends="compile">	
+<!-- use this with ant -Dcvspass=yourCVSPass
+it's work in progress, see org.makumba.parade.CvsJCVSTest -->
+		<java	classname="org.makumba.parade.CvsJCVSTest" fork="true"  
+			failonerror="true"
+		>
+		<arg value="${cvspass}" />
+		<jvmarg value="-Xdebug"/>	
+		<jvmarg value="-Xrunjdwp:transport=dt_shmem,address=jdbconn,server=y,suspend=n" />
+		     <classpath>
+			<pathelement path="${webapp.home}/WEB-INF/classes"/>			
+			<path refid="project.class.path" />
+		      </classpath>
+	 	</java>
+	</target>
+
+	<target name= "babylon" description="Start a babylon chat server">	
+	    <java classname="babylonServer" fork="true"> 
+		<arg value="-nographics" />
+		<classpath>
+			<pathelement path="${webapp.home}/chat/babylon.jar"/>
+			<pathelement path="${webapp.home}/WEB-INF/classes"/>			
+			<path refid="project.class.path" />
+		</classpath>
+	    </java>
+	</target>
+
+	<target name= "babylonStop" description="Stop babylon chat server">	
+	    <java classname="babylonServerShutdown" fork="true"> 
+		<arg value="-nographics" />
+		<classpath>
+			<pathelement path="${webapp.home}/chat/babylon.jar"/>
+			<pathelement path="${webapp.home}/WEB-INF/classes"/>			
+			<path refid="project.class.path" />
+		</classpath>
+	    </java>
+	</target>
+
+
+</project>
+

@@ -1,0 +1,25 @@
+2002 Dec 17:
+the edit applet is now multifile
+
+2002 Dec 15:
+added edit applets 
+
+2002 Nov 28: 
+works with tomcat 4.1
+
+2002 Nov 7 (?):
+added login capabilities
+
+2002 Feb 13: 
+refactored parade, preserved functionality
+ant works (didn't yet test with 1.4)
+ant 1.3 minimum required
+logs available
+took out dependencies on makumba, will only be used for db-related parts
+directory browse works, but not with the new column/manager structure
+
+2002 Feb 11: 
+adding rows and working with servlet contexts works
+
+2002 Feb 9: 
+first version

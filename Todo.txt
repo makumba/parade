@@ -1,0 +1,101 @@
+$Id$
+
+HOT STUFF
+state saving: (4) currently the only saved state is rowname and path. managers should be able to save state of their own (e.g. ServletContextManager should save what contexts were installed, which of those were started, etc). since a PageContext is needed to execute the things properly, the contexts will only be started at first access. need to figure a better way.
+
+(4) FileManager: "last touched" per directory). should ignore logs, makumba.jar, and other non-source filez.
+
+files: (3) directory.jsp: for each file "copy to" Row, "move to" Row, etc. Row is from the same CVS module. info about the state of the file (older, newer) in that other row could come too. (see also distributed parade)
+
+(5) *ParadeAdd.jsp: make some form of automatic row adding to work
+make some form of automatic row deletion to work (with warnings about the "locally modified" files, etc). cvs checkout at "add row". propose path if it's not indicated in the form of BUNDLE_HOME/cvsuser/modulename (where parade is in BUNDLE_HOME/sources/parade, i.e. ../../cvsuser/modulename)
+disable HTML controls that don't work yet (e.g. cvs module/user inputs). disabled works in explorer 5, doesnt seem to in netscape 4.7, maybe a doctype is needed?
+
+(4) link to tomcat/work/*.java [somePage_jsp.java]
+hyperlinks in error messages
+
+(4) cvs live support, bring fresh info from the server if connection available
+
+(3)- for each parade row (index.jsp): number of files that are in tracker and not on disk in that row, and the other way around
+
+(4) login for presence awareness. simple possibilities to initiate communication. 
+for login and logging, need to introduce the concept of filter, that is invoked at every operation invocation. something like
+filters= org.eu.best.ITCLogin, etc
+
+(4) safer interface (edit further away from delete, cvs update further away from committ, etc)'
+
+BUGS
+FIXED: cvs allows adding non-existing (just described) files/dirs.
+if there is an empty directory in cvs it should list it among files, even if cvs update doesn't create it (because it is empty).
+
+FEATURES 
+prepend the login name to all CVS commit logs
+have "are you sure" dialog for CVS add, cvs remove, etc.
+faster source viewer
+simple view feature for files other than JSP, MDD, Java (e.g. html, txt)
+history window
+better operation call in page response (currently only one operation is allowed, need more, see below, collective and individual entries are not supported)
+support compile+reload context, stop+getMakumba+start context
+support makumba getDatabase
+don't show cvs operation links if cvs connection not available
+CVS login. probably solvable with loggers.
+
+(3) System strip: memory, order garbage collection, etc
+DONE memory info.
+what about garbage collection? should it be just ran?
+
+(1) cvsweb URL (http://www.best.eu.org/cgi-bin/cvsweb.cgi/*) should come from a config file (not be hardcoded in a jsp
+
+DONE: a _working_ file upload strip
+
+file delete could just rename to *-parade-deleted eg: readme.txt becomes readme.txt-parade-deleted then it can be resurected or exprunged from the interface (shown with overstrike while just deleted)
+
+undo: there could be several levels of undo - old files are saved as *-parade-backup-01 then rotated during every consecutive save. the last one is deleted if number becomes greater than xx OR file is older than n days. Interface could show number of backups, but hiding all the backup files from the listing
+
+tracker could show 'run' links to pages with parameters.
+
+(2) README file per dir?
+readmeStrip shows content of the first file found: readme.html, readme.txt, readme (case insensitive)
+
+(5) remote editor "new file", "save as", 
+jump to line, column (and stay there after 
+
+(3) remote editor: "save and compile", "save, compile, and reload webapp"
+(currently only possible by clicking save, compile, reload in a sequence)
+
+(3) display files related by other criteria than directory (e.g. "all uncommitted files", results of a search, etc)
+
+(2) index.jsp and directory.jsp: parade-level and directory level "synchronize with" other row (mostly useful for remote parade rows). 
+
+DONE: command window could have color-coded output (cvs update: Modified files in RED, updates in blue, Conflicts in red...)
+
+(2) index.jsp: the refresh at Parade reload doesn't work in explorer 5, keeps reloading the page with the same parameters, rather than with no parameters as instructed...
+
+(2) index.jsp: is it possible to have every parade row as a big form, where every button invokes a separate operation. can the submit value be different from the text? 
+<input type=submit name=op value=addParadeRow text="add row"> ? This would be needed for a reasonable "row delete", where each column can place its own input controls (name/path places "delete files too", cvs places "cvs commit before", etc). Otherwise, a separate <tr> will be needed for each Parade row, to do delete in a separate form.
+
+DONE: do not alow editing binary files
+
+(3) tail the server log and present just the last part
+
+(3) on windows, getMakumba for a servlet context will only work with stop, update and then start again. there could be an automatic operation for that.
+
+(2) For parade, stop+getMakumba+start has to be done by an external ant target (like ant reload is invoked now for parade reload)
+
+(3) there are specific targets for local makumba development, that do "compile makumba from ../makumba and copy the jar in WEB-INF". they should be standardized in name (currently called maktomcat in karamba) and followed by context reload
+
+(2) the tomcat manager can be cleverer in finding the parade context name, the manager username and password. that involves parsing server.xml and tomcat-user.xml
+
+(2) LocalRowStore: currently it's done with a properties file called rowdata.properties. makumba database instead? does it pay? it can be added at any time (just replace LocalRowStore with another manager). 
+
+DISTRIBUTED PARADE
+(2) seems easy for a parade server to connect to a main server. upon connection, the two parades will pass their local row data to eachother and will display eachother's data. when the http user wants to browse dirs, he'll be connected normally to the respective parade server, so from there on it's no problem. This relation is transitive (if both A and B are connected to C, all 3 will display A+B+C). Implementation details:
+- need to set a "server:port" flag, besides "rowname" and "path". very easy
+- need to pass the row data as generated by the local managers. the format for this is a bit of a problem, but a plain properties format will do. XML would be best, but not really needed
+- need to display "remote" rows a bit differenly (color, etc)
+- would be good to keep a log of remote parade connections/disconnections
+
+ARCHITECTURE
+Managers should be java beans
+a more strictly type-checked manager structure (method checks, attribute checks).
+

@@ -1,0 +1,19 @@
+# this file will be re-written by the server at first access. do not CVS!
+
+# the servlet container adapter, needed for context management
+parade.servletContext.servletContainer=org.makumba.parade.TomcatManager
+
+# time to wait after self reload, dependent on the machine
+parade.servletContext.selfReloadWait=12
+
+# should be read from tomcat/conf/tomcat-user.xml
+parade.servletContext.tomcatUser=itc
+parade.servletContext.tomcatPassword=karamba
+
+# should be read from tomcat/conf/server.xml
+# will be rewritten and used at ant reload:
+parade.servletContext.paradeContext=
+parade.servletContext.tomcatServerPort=8080
+parade.servletContext.tomcatServerName=localhost
+
+
