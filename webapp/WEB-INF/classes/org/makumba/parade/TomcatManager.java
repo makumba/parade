@@ -101,7 +101,18 @@ public class TomcatManager implements ServletContainer
 	throw new RuntimeException("cannot find common root to context");
       String s= makeAccess("install?path="+contextName+"&war=file:"+Config.paradeBaseRelativeToTomcatWebapps+File.separator+dir+context.substring(canDir.length()));
       if(s.startsWith("OK"))
-	servletContextCache.put(contextName, new Integer(RUNNING));
+      {
+        servletContextCache.put(contextName, new Integer(RUNNING));
+        String s1=stopContext(contextName);
+        if(s1.startsWith("OK"))
+           s+="<br>"+startContext(contextName);
+        else
+	{
+	   s+="<br>Attempting to stop and start "+ contextName +" for checking correct installation failed "+ pleaseCheck(s1);
+	   servletContextCache.put(contextName, new Integer(STOPPED));
+	}
+      }
+      
       return s;
     }catch(IOException e){ throw new RuntimeException(e.getMessage()); }
   }
@@ -125,6 +136,8 @@ public class TomcatManager implements ServletContainer
     String s= makeAccess("start?path="+contextName);
     if(s.startsWith("OK"))
        servletContextCache.put(contextName, new Integer(RUNNING));
+    else
+       s="Could not start "+contextName+". "+pleaseCheck(s);
     return s;
   }
 
@@ -149,7 +162,19 @@ public class TomcatManager implements ServletContainer
     String s=makeAccess("reload?path="+contextName);
     if(s.startsWith("OK"))
        servletContextCache.put(contextName, new Integer(RUNNING));
+    else
+       s="Could not reload "+contextName+". "+pleaseCheck(s);
     return s;
+  }
+
+  static String pleaseCheck(String s)
+  {
+	return 
+         "Please check the output on the Parade log. "+
+         "Make sure that the filters and servlets declared in web.xml exist and are compiled. "+
+         "Make sure that the tag libraries declared in web.xml exist. "+
+         "A complete CVS update followed by 'clean' and 'compile' might help. "+
+         "<br>Message from Tomcat (may be uncomplete) is: "+s;
   }
 
 }
