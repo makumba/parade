@@ -4,7 +4,7 @@ String cvscommand="<a target='command' href=command.jsp?"+pageContext.findAttrib
 String cvscommitt="<a target='command' href=cvsCommit.jsp?reload=&"+pageContext.findAttribute("parade.sameDir")+"&entry="+java.net.URLEncoder.encode((String)pageContext.findAttribute("file.name"));
 Integer status= (Integer)pageContext.findAttribute("cvs.status");
 boolean onDisk=(pageContext.findAttribute("file.file")!=null);
-String cvsweb="http://www.best.eu.org/cgi-bin/cvsweb.cgi/"; //this should go to 
+String cvsweb="http://cvs.makumba.org/cgi-bin/cvsweb.cgi/"; //this should go to 
 String cvswebLink=cvsweb+pageContext.findAttribute("cvs.module")+"/"+pageContext.findAttribute("file.path")+pageContext.findAttribute("file.name");
 
 if(status==null) {%><%=onDisk?"":"<!--"%>
