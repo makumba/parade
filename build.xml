@@ -92,9 +92,11 @@
           <include name="org/makumba/parade/sourceedit/*.class" />
          </fileset>
 	</copy>
-
 	<antcall target="applets" />
-
+	<ant antfile="${generics.path}" target="startTomcat" />
+	</target>
+	
+	<target name="quickStart" description="just start tomcat">
 	<ant antfile="${generics.path}" target="startTomcat" />
 	</target>
 

@@ -3,7 +3,7 @@ import java.util.*;
 import java.io.*;
 import java.lang.reflect.*;
 import javax.servlet.jsp.*;
-import org.makumba.view.jsptaglib.HtmlUtils;
+import org.makumba.util.*;
 
 /** the entrance to the Parade features */
 public class Config

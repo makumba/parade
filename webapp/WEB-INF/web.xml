@@ -5,6 +5,11 @@
     "http://java.sun.com/j2ee/dtds/web-app_2.3.dtd">
 
 <web-app>
+  <filter>
+     <filter-name>makumba_controller</filter-name>
+     <filter-class>org.makumba.controller.http.ControllerFilter</filter-class>
+  </filter>
+
    <!-- this is needed for makumba to correctly clean up its caches at webapp reload -->
    <listener >
 	<listener-class>org.makumba.util.NamedResourcesContextListener</listener-class>

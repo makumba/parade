@@ -34,7 +34,7 @@ public class LogServlet extends HttpServlet
     String line=null;
     while((line=r.readLine())!=null)
       {
-         line=org.makumba.view.jsptaglib.HtmlUtils.string2html(line);
+         line=org.makumba.util.HtmlUtils.string2html(line);
 	int n= line.indexOf('@'+context+':');
 	if(n==-1)
 	  {
