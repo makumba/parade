@@ -1,0 +1,1 @@
+showMessage("<%=new java.util.Date()%> Hello....");
