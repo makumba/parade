@@ -2,6 +2,8 @@ package org.makumba.parade;
 import javax.servlet.http.*;
 import java.io.*;
 import java.util.logging.*;
+import org.makumba.HtmlUtils;
+
 
 public class LogServlet extends HttpServlet
 {
@@ -34,7 +36,7 @@ public class LogServlet extends HttpServlet
     String line=null;
     while((line=r.readLine())!=null)
       {
-         line=org.makumba.util.HtmlUtils.string2html(line);
+         line=HtmlUtils.string2html(line);
 	int n= line.indexOf('@'+context+':');
 	if(n==-1)
 	  {
