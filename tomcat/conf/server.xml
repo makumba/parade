@@ -47,18 +47,9 @@ Below is a hack to be able to stop tomcat using ant <get >, or unix wget, or a b
          UserDatabaseRealm to authenticate users -->
     <Resource name="UserDatabase" auth="Container"
               type="org.apache.catalina.UserDatabase"
-       description="User database that can be updated and saved">
-    </Resource>
-    <ResourceParams name="UserDatabase">
-      <parameter>
-        <name>factory</name>
-        <value>org.apache.catalina.users.MemoryUserDatabaseFactory</value>
-      </parameter>
-      <parameter>
-        <name>pathname</name>
-        <value>conf/tomcat-users.xml</value>
-      </parameter>
-    </ResourceParams>
+	      description="User database that can be updated and saved"
+	      factory="org.apache.catalina.users.MemoryUserDatabaseFactory"
+       	      pathname="conf/tomcat-users.xml" />
 
   </GlobalNamingResources>
 
@@ -173,12 +164,6 @@ Below is a hack to be able to stop tomcat using ant <get >, or unix wget, or a b
       <!--
       <Valve className="org.apache.catalina.valves.RequestDumperValve"/>
       -->
-
-      <!-- Global logger unless overridden at lower levels 
-      <Logger className="org.apache.catalina.logger.FileLogger"
-              prefix="catalina_log." suffix=".txt"
-              timestamp="true"/> -->
-      <Logger className="org.apache.catalina.logger.SystemOutLogger" />
 
       <!-- Because this Realm is here, an instance will be shared globally -->
 
@@ -391,19 +376,6 @@ Below is a hack to be able to stop tomcat using ant <get >, or unix wget, or a b
                  directory="logs"  prefix="localhost_access_log." suffix=".txt"
                  pattern="common" resolveHosts="false"/>
         -->
-
-        <!-- Logger shared by all Contexts related to this virtual host.  By
-             default (when using FileLogger), log files are created in the "logs"
-             directory relative to $CATALINA_HOME.  If you wish, you can specify
-             a different directory with the "directory" attribute.  Specify either a
-             relative (to $CATALINA_HOME) or absolute path to the desired
-             directory.-->
-      <Logger className="org.apache.catalina.logger.SystemOutLogger" />
-<!--
-        <Logger className="org.apache.catalina.logger.FileLogger"
-                 directory="logs"  prefix="localhost_log." suffix=".txt"
-            timestamp="true"/>
--->
       </Host>
 
     </Engine>
