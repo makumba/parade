@@ -88,8 +88,8 @@
          IP address of the remote client.
     -->
 
-    <!-- Define a non-SSL Coyote HTTP/1.1 Connector on port ###RESTART_PORT### -->
-    <Connector port="###RESTART_PORT###"
+    <!-- Define a non-SSL Coyote HTTP/1.1 Connector on port ###HTTP_PORT### -->
+    <Connector port="###HTTP_PORT###"
                maxThreads="150" minSpareThreads="25" maxSpareThreads="75"
                enableLookups="false" redirectPort="8443" acceptCount="100"
                debug="0" connectionTimeout="20000" 
