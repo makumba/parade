@@ -6,6 +6,29 @@
 
 <web-app>
 
+<!-- parade-wide triggers: they are called in all contexts. they cannot be reloaded! -->
+ <filter> 	 
+      <filter-name>trigger</filter-name> 	 
+      <filter-class>org.eu.best.tools.TriggerFilter</filter-class> 	 
+      <init-param><param-name>beforeContext</param-name> 	 
+                 <param-value>/</param-value> 	 
+      </init-param> 	 
+      <init-param><param-name>afterContext</param-name> 	 
+                 <param-value>/</param-value> 	 
+      </init-param> 	 
+      <init-param><param-name>beforeServlet</param-name> 	 
+                 <param-value>/servlet/org.makumba.parade.AccessServlet</param-value> 	 
+      </init-param> 	 
+      <init-param><param-name>afterServlet</param-name> 	 
+                 <param-value>/servlet/org.makumba.parade.EndAccessServlet</param-value> 	 
+      </init-param> 	 
+   </filter> 	 
+  	 
+   <filter-mapping> 	 
+     <filter-name>trigger</filter-name> 	 
+     <url-pattern>/*</url-pattern> 	 
+   </filter-mapping>
+
   <!-- ======================== Introduction ============================== -->
 
 
