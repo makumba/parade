@@ -155,7 +155,9 @@ public class FileManager
 	List l=result;
 	if(n!=-1)
 	  {
-	    l=(List)((Map)data.get(path.substring(0, n+1))).get("file.children");
+	      Map m1=((Map)data.get(path.substring(0, n+1)));
+	      if(m1!=null)
+		  l=(List) m1.get("file.children");
 	  }
 	l.add(m);
       }
