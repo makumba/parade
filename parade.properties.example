@@ -58,7 +58,7 @@ tomcat.output=tomcat/logs/server-output.txt
 # see CvsManager.setParadeSimple(), FileManager.setParadeSimple, etc
 
 parade.authorizerClass=org.eu.best.BestMemberAuthorizer
-parade.authorizationMessage=Parade, use your BEST password
+parade.authorizationMessage=Parade, use password of your BEST private area account
 parade.authorizationDB=localhost_mysql_karamba
 
 
@@ -107,7 +107,7 @@ files.footersInForm=chooserFileFooter
 #files.footers=newFileStrip, trackerNewStrip, uploadFileStrip, dateStrip
 files.footers=dateStrip
 
-ant.allowedOps= compile, clean, getTaglibs, getMakumba, getLocalMakumba, doc
+ant.allowedOps= compile, clean, getTaglibs, getMakumba, getLocalMakumba, copyLocalMakumba, doc, applets
 ant.allowedInstall=install
 
 tree.managers=org.makumba.parade.FileManager,  org.makumba.parade.TrackerManager
