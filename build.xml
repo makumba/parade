@@ -109,7 +109,8 @@
 	<ant antfile="${generics.path}" target="reload" />
 	</target>
 
-	<target name="getTaglibs" description="download and install all taglibs needed for the project." >
+	<target name="getTaglibs" description="update ../commons.xml and download and install all taglibs needed for the project." >
+	<cvs command="update ${generics.cvs}" dest=".."/>	
 	<antcall target="getMakumba"/>
 	<antcall target="getJSTL" />
 	</target>
