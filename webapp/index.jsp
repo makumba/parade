@@ -54,6 +54,8 @@ ncols++;
 }
 %>
 
+<%--
+  ### Parade header (adding new row) -- commented out; should be moved to another file (parts of it did work) ###
 
 <tr> <form action=index.jsp >
 <input type=hidden value=addParadeRow name=op> 
@@ -77,6 +79,8 @@ if((coljsp=(String)cols.next()).length()==0){ %><td><%}else
 </td>
 </form>
 
+  ### Parade header ###
+--%>
 <% 
 for(Iterator dt= orderedResult.iterator(); dt.hasNext(); )
 {
