@@ -6,8 +6,10 @@ Integer i=(Integer)pageContext.findAttribute("servletContext.status");
    if(i.intValue()==org.makumba.parade.ServletContainer.RUNNING)
 { %>
 (<a href="<%=x%>" target="surf">surf</a>)
-<% }else{ %>
-(press "install" to surf)
-<% } 
+<% }else if(i.intValue()==org.makumba.parade.ServletContainer.NOT_INSTALLED){
 %>
+(press "install" to surf)
+<% } else{ %>
+(press "start" to surf)
+<%} %>
 [ <a href=/servlet/log?context=<%=x=(String)pageContext.findAttribute("parade.row")%>>log</a>]
