@@ -16,7 +16,6 @@ This is a copy of the former server.xml.example. Finally we can CVS server.xml i
 catalina.home (relative to tomcat/.., place where tomcat was downloaded)
 http.port (port where tomcat listens for accesses)
 http.restart.port (port where tomcat listens for shutdown commands)
-webapp.path (relative to tomcat/.., typically "webapp")
 java.io.tmpdir (relative to tomcat/.., needed to find the makumba documentation)
 
 Other such variables can be defined. simply add them to karamba.properties or parade.properties, pass them in the startTomcat target of commons.xml and use them here.
@@ -232,7 +231,7 @@ Below is a hack to be able to stop tomcat using ant <get >, or unix wget, or a b
        unpackWARs="true" autoDeploy="true"
        xmlValidation="false" xmlNamespaceAware="false">
 
-	<Context path="" docBase="../../${webapp.path}" debug="0" reload="true"/>
+	<Context path="" docBase="../../webapp" debug="0" reload="true"/>
         <Context path="/logs" docBase="../logs" debug="0" reload="false"/>
 
         <Context path="/manager" docBase="${catalina.home}/server/webapps/manager"
