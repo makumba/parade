@@ -45,7 +45,7 @@
 	</target>
 
 
-	<target name="tomcat" description="start tomcat 4" >
+	<target name="tomcat" description="start tomcat 5" >
 	<antcall target="compile" />
 	<!-- copy util-java/lib to tomcat's common, for use by webapps and LoginFilter
 	according to the tomcat classloader howto, should be copied to tomcat's share/classes, 
@@ -100,7 +100,7 @@
 	<ant antfile="${generics.path}" target="startTomcat" />
 	</target>
 
-	<target name="stopTomcat" description="stop tomcat 4">
+	<target name="stopTomcat" description="stop tomcat 5">
 	<ant antfile="${generics.path}" target="stopTomcat" />
 	</target>
 	

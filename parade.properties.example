@@ -11,7 +11,7 @@ http.port=8080
 http.restart.port=8081
 
 #where is tomcat?
-catalina.home=../../util-java/tomcat-4.1
+catalina.home=../../util-java/tomcat-5
 
 #where is the web application?
 webapp.path=webapp
