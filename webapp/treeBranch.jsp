@@ -54,9 +54,9 @@ for(Iterator j=tree.iterator();j.hasNext(); ctr++)
 		//println(st.nextToken());
 	}
 
-%><%=treeRow %> = new TreeNode('<%=fname%>', 'folder.gif', 'files.jsp?context=<%=context%>&path=<%=path%><%=File.separator%><%=fname%>', false);  
+%><%=treeRow %> = new TreeNode('<%=fname%>', 'folder.gif', 'files.jsp?context=<%=context%>&path=<%=path%>/<%=fname%>', false);  
 <% 
-String subDir=path+File.separator+fname;
+String subDir=path+'/'+fname;
 	if(level<50) { //prevent infinite depth (because of symlinks)
 %><jsp:include page="treeBranch.jsp">
 	<jsp:param name="context" value="<%=context%>" />
@@ -96,10 +96,10 @@ for(Iterator j=tree.iterator();j.hasNext(); ctr++)
 	/*	<img src="images/tree-leaf.gif">
 	*/	
 %>
-<br><font color="#202090"><%=treeRow %><img src="images/tree-leaf.gif" ALIGN="absbottom" valign="absbottom"></font><a href="files.jsp?context=<%=context%>&path=<%=path%><%=File.separator%><%=fname%>" target="directory" 
-<%--onClick="javascript:SwitchFolder('<%=path%><%=File.separator%><%=fname%>');"--%>
-><img src="images/tree-closed.gif" border="0" ALIGN="absbottom" <%--name="<%=path%><%=File.separator%><%=fname%>"--%>><%=fname%></a><% 
-String subDir=path+File.separator+fname;
+<br><font color="#202090"><%=treeRow %><img src="images/tree-leaf.gif" ALIGN="absbottom" valign="absbottom"></font><a href="files.jsp?context=<%=context%>&path=<%=path%>/<%=fname%>" target="directory" 
+<%--onClick="javascript:SwitchFolder('<%=path%>/<%=fname%>');"--%>
+><img src="images/tree-closed.gif" border="0" ALIGN="absbottom" <%--name="<%=path%>/<%=fname%>"--%>><%=fname%></a><% 
+String subDir=path+'/'+fname;
 	if(level<50) { //prevent infinite depth (because of symlinks)
 %><jsp:include page="treeBranch.jsp">
 	<jsp:param name="context" value="<%=context%>" />

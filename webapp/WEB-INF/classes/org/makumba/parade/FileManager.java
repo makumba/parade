@@ -43,7 +43,7 @@ public class FileManager
     pc.setAttribute("file.readingTime", new Long(new java.util.Date().getTime()), javax.servlet.jsp.PageContext.REQUEST_SCOPE);
     pc.setAttribute("file.ignoredList", ignored, javax.servlet.jsp.PageContext.REQUEST_SCOPE);
     Map row= (Map)pc.findAttribute("parade.rowData");
-    File f=new File(row.get("parade.path")+File.separator+((String)row.get("file.path")).replace('/', File.separatorChar));
+    File f=new File(row.get("parade.path")+"/"+(String)row.get("file.path"));
     return f;
   }
 
