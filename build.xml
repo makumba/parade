@@ -15,7 +15,7 @@
 	<cvs command="checkout ${generics.cvs}" dest=".."/>
 	<ant antfile="${generics.path}" target="installTomcat"/>
 	<cvs command="update" dest="." />
-	<antcall target="getMakumba" />
+	<antcall target="getTaglibs" />
 
 	<copy file="${webapp.path}/WEB-INF/classes/MakumbaDatabase.properties.example"
 		 toFile="${webapp.path}/WEB-INF/classes/MakumbaDatabase.properties" />
@@ -109,9 +109,18 @@
 	<ant antfile="${generics.path}" target="reload" />
 	</target>
 
+	<target name="getTaglibs" description="download and install all taglibs needed for the project." >
+	<antcall target="getMakumba"/>
+	<antcall target="getJSTL" />
+	</target>
+
         <target name="getMakumba" description="get the lastest makumba JAR. Use this if you see makumba compilation errors!!!" >
 	<ant antfile="${generics.path}" target="getMakumba" />
         </target>
+
+        <target name="getJSTL" description="install JSTL" >
+	<ant antfile="${generics.path}" target="getJSTL"/>
+	</target>
 
 	<target name="compile" description="compile the java files">
 	<ant antfile="${generics.path}" target="compile" inheritRefs="true"/>
