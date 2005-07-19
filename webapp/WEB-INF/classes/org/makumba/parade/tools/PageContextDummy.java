@@ -1,10 +1,19 @@
 package org.makumba.parade.tools;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.jsp.*;
-import java.util.*;
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.Hashtable;
+
+import javax.servlet.Servlet;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.PageContext;
 
 /** sometimes you need a page context and can't get one... here's a dummy */
 public class PageContextDummy extends PageContext {

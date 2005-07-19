@@ -1,9 +1,11 @@
 package org.makumba.parade;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.net.*;
-import java.io.*;
-import org.eu.best.tools.*;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServlet;
+
+import org.makumba.parade.tools.HttpServletRequestDummy;
+import org.makumba.parade.tools.PageContextDummy;
 
 public class InitServlet extends HttpServlet
 {

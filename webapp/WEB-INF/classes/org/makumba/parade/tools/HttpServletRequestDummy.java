@@ -1,15 +1,13 @@
 package org.makumba.parade.tools;
 
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpSession;
-import javax.servlet.ServletInputStream;
-
 import java.util.Enumeration;
-import java.util.Map;
 import java.util.HashMap;
 import java.util.Hashtable;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 
 public class HttpServletRequestDummy    implements HttpServletRequest {

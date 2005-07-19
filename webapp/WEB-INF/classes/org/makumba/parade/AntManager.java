@@ -1,8 +1,21 @@
 package org.makumba.parade;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.*;
-import org.apache.tools.ant.*;
-import java.io.*;
+import java.util.Vector;
+
+import org.apache.tools.ant.BuildEvent;
+import org.apache.tools.ant.DefaultLogger;
+import org.apache.tools.ant.Main;
+import org.apache.tools.ant.Project;
+import org.apache.tools.ant.ProjectHelper;
+import org.apache.tools.ant.Target;
 
 
 public class AntManager

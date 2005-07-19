@@ -1,14 +1,12 @@
 package org.makumba.parade.applets;
-import java.awt.TextArea;
 import java.awt.Font;
-
-import java.awt.event.KeyEvent;
+import java.awt.TextArea;
 import java.awt.event.KeyAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.TextEvent;
 import java.awt.event.TextListener;
-
 
 import org.makumba.parade.sourceedit.SourcePointer;
 import org.makumba.parade.sourceedit.SourcePosition;

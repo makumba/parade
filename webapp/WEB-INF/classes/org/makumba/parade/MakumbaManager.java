@@ -1,12 +1,15 @@
 package org.makumba.parade;
-import org.makumba.view.jsptaglib.*;
-import java.net.*;
-import java.io.*;
-import java.lang.reflect.*;
-import java.util.*;
-import java.util.jar.*;
-import java.util.zip.*;
-import org.makumba.controller.http.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Method;
+import java.util.Properties;
+import java.util.jar.Attributes;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
+import java.util.jar.Manifest;
 
 public class MakumbaManager
 {

@@ -1,10 +1,9 @@
 package org.makumba.parade.sourceedit;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.net.URLConnection;
-import java.io.InputStream;
 import java.io.ByteArrayOutputStream;
-
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.Observable;
 
 /** a (possibly remote) pointer to a source file hosted in a Parade */

@@ -1,7 +1,8 @@
 package org.makumba.parade.tools;
-import java.io.*;
-import java.util.*;
-import java.text.*;
+import java.io.OutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class PerThreadPrintStream extends java.io.PrintStream
 {

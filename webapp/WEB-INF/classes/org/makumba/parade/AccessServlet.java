@@ -1,8 +1,17 @@
 package org.makumba.parade;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.jsp.*;
-import org.eu.best.tools.*;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpServletResponse;
+
+import org.makumba.parade.tools.Authorizer;
+import org.makumba.parade.tools.DatabaseAuthorizer;
+import org.makumba.parade.tools.HttpLogin;
+import org.makumba.parade.tools.PerThreadPrintStream;
 
 /** The servlet called at the begining of each parade access, in all servlet contexts 
  * This servlet does: login, calls Config.reloadLoggingConfig for refreshing of logging.properties, and 

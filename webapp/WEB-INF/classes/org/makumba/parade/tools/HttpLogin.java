@@ -1,6 +1,9 @@
 package org.makumba.parade.tools;
-import javax.servlet.*;
-import javax.servlet.http.*;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /** this class provides http login on a servlet according to a given authorization policy */
 public class HttpLogin

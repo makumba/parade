@@ -1,6 +1,8 @@
 package org.makumba.parade;
-import java.util.*;
-import javax.servlet.*;
+import java.util.Comparator;
+import java.util.Map;
+
+import javax.servlet.ServletRequest;
 
 public class MapComparator implements Comparator
 {

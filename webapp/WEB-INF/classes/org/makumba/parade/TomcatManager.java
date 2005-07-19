@@ -1,10 +1,15 @@
 package org.makumba.parade;
-import javax.servlet.*;
-import javax.servlet.jsp.*;
-import java.net.*;
-import java.io.*;
-import java.util.*;
-import org.eu.best.tools.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.StringWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.StringTokenizer;
+
+import org.makumba.parade.tools.ForeignHttpAuthorizer;
 
 public class TomcatManager implements ServletContainer
 {

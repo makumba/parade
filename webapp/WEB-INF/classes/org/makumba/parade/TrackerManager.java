@@ -1,7 +1,16 @@
 package org.makumba.parade;
-import java.util.*;
-import java.io.*;
-import org.makumba.*;
+import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Vector;
+
+import org.makumba.Database;
+import org.makumba.MakumbaError;
+import org.makumba.MakumbaSystem;
+import org.makumba.Pointer;
 
 public class TrackerManager
 {

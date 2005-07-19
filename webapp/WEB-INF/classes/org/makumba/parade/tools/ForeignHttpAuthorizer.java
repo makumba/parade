@@ -1,5 +1,7 @@
 package org.makumba.parade.tools;
-import java.net.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 
 /** this class connects to a http site and tests if a password is ok */
 public class ForeignHttpAuthorizer implements Authorizer

@@ -1,8 +1,27 @@
 package org.makumba.parade;
-import java.util.*;
-import java.io.*;
-import java.lang.reflect.*;
-import javax.servlet.jsp.*;
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Properties;
+import java.util.StringTokenizer;
+import java.util.Vector;
+
+import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.PageContext;
+
 import org.makumba.HtmlUtils;
 
 /** the entrance to the Parade features */
@@ -477,8 +496,8 @@ public class Config
       loggingFileDate=Long.parseLong(lfd);
     if(loggingFileDate <l)
       {
-	String old=org.eu.best.tools.PerThreadPrintStream.get();
-	org.eu.best.tools.PerThreadPrintStream.set("logging");
+	String old=org.makumba.parade.tools.PerThreadPrintStream.get();
+	org.makumba.parade.tools.PerThreadPrintStream.set("logging");
 	if(lfd!=null)
 	  System.out.println(new java.util.Date()+" reloading logger configuration");
 	try{
@@ -501,7 +520,7 @@ public class Config
 		System.out.println("<"+s+"> set to <"+p.get(s)+">");
 	    }
 	}catch(IOException ioe){ throw new RuntimeException(ioe.toString()); }
-	org.eu.best.tools.PerThreadPrintStream.set(old);
+	org.makumba.parade.tools.PerThreadPrintStream.set(old);
       }
     System.setProperty("org.makumba.parade.loggingFileDate", ""+l);
   }

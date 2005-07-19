@@ -1,5 +1,6 @@
 package org.makumba.parade;
-import java.io.*;
+import java.io.File;
+import java.io.FileFilter;
 
 public class SimpleFileFilter implements FileFilter
 {

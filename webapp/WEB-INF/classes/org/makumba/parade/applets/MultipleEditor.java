@@ -1,27 +1,23 @@
 package org.makumba.parade.applets;
 
-import java.awt.Panel;
-import java.awt.Component;
-import java.awt.CardLayout;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Choice;
-import java.awt.TextField;
 import java.awt.Button;
-import java.awt.Label;
+import java.awt.CardLayout;
+import java.awt.Choice;
+import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.Font;
-
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ActionListener;
+import java.awt.Label;
+import java.awt.Panel;
+import java.awt.TextField;
 import java.awt.event.ActionEvent;
-import java.awt.event.TextListener;
-import java.awt.event.TextEvent;
-
-import java.util.Observer;
-import java.util.Observable;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Vector;
 
 import org.makumba.parade.sourceedit.SourcePointer;

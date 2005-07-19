@@ -1,5 +1,6 @@
 package org.makumba.parade.applets;
 import java.awt.BorderLayout;
+
 import org.makumba.parade.sourceedit.SourcePointer;
 import org.makumba.parade.sourceedit.SourcePosition;
 import org.makumba.parade.sourceedit.StatusDisplay;
