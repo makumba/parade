@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="webapp/WEB-INF/classes">
+		<attributes>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/makumba.jar">
+		<attributes>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/servlet-api.jar">
+		<attributes>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/jsp-api.jar">
+		<attributes>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/ant.jar">
+		<attributes>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="webapp/WEB-INF/classes"/>
+</classpath>
