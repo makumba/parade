@@ -34,6 +34,10 @@
         <target name="applets" description="compiles applets and copies them to the webapp">
 	<antcall target="compile"/>
 	<!-- copy applets to webapp/ -->
+    <antcall target="appletCopy" />
+    </target>
+
+	<target name="appletCopy">
 	<copy toDir="webapp/" overwrite="true">
          <fileset dir="webapp/WEB-INF/classes">
           <include name="org/makumba/parade/applets/*.class" />
