@@ -4,3 +4,4 @@ servletContext.properties
 parade.properties
 logging.properties
 reload-log.txt
+webapps_dummy

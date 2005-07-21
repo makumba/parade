@@ -176,5 +176,12 @@ it's work in progress, see org.makumba.parade.CvsJCVSTest -->
 	</target>
 
 
+	<target name= "eclipseInstall" description="Configures files for Eclipse">	
+	<copy file="parade.properties.example" toFile="parade.properties" />
+	<copy file="logging.properties.example" toFile="logging.properties" />
+	<mkdir dir="webapps_dummy"/>
+	</target>
+
+
 </project>
 
