@@ -150,6 +150,8 @@ public class ServletContextManager
   public static String searchWebinf(String original, File p)
   {
     String[] s= p.list();
+	if (s == null) throw new RuntimeException(original+" is not a correct pathname.");
+	
     for(int i=0; i<s.length; i++)
       {
 	File f= new File(p, s[i]);
