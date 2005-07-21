@@ -98,7 +98,7 @@ files.columns=icon, name, edit, date, size, cvs, tracker
 # to be added:... cvs, tracker, codevel, compile
 # column with general observations...
 
-tracker.DB=devel.best.eu.org_mysql_karambasmall
+tracker.DB=localhost_mysql_makumba
 
 # headers and footers for files.jsp . rather than changing index.jsp, use these
 files.responseHeaders=makumba
