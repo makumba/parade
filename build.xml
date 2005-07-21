@@ -176,10 +176,20 @@ it's work in progress, see org.makumba.parade.CvsJCVSTest -->
 	</target>
 
 
-	<target name= "eclipseInstall" description="Configures files for Eclipse">	
-	<copy file="parade.properties.example" toFile="parade.properties" />
-	<copy file="logging.properties.example" toFile="logging.properties" />
-	<mkdir dir="webapps_dummy"/>
+
+	<target name="checkInitialFiles">
+	<!-- it just checks if one file exist, this it's assumed that
+	     all the others were copied -->
+		<available file="parade.properties" type="file" property="files.copied"/>
+	</target>
+		
+	<target name= "eclipseInstall" description="Configures files for Eclipse" unless="files.copied" depends="checkInitialFiles">
+		<copy file="parade.properties.example" toFile="parade.properties" />
+		<copy file="logging.properties.example" toFile="logging.properties" />
+		<copy file="servletContext.properties.example" toFile="servletContext.properties" />
+		<copy file="${webapp.path}/WEB-INF/classes/MakumbaDatabase.properties.example"
+				 toFile="${webapp.path}/WEB-INF/classes/MakumbaDatabase.properties" />
+		<mkdir dir="webapps_dummy"/>
 	</target>
 
 
