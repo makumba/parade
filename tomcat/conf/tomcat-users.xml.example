@@ -1,7 +1,4 @@
-<!--
-BEST-specific:
-this file is used by commons.xml to build tomcat-users.xml at parade installation. 
--->
+<!-- you might need to change parade.properties when you change this file -->
 <tomcat-users>
-  <user name="###USER###" password="###PASS###" roles="manager" />
+  <user name="someuser" password="somepass" roles="manager" />
 </tomcat-users>
