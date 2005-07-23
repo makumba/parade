@@ -11,7 +11,7 @@
 try{ 
 String t;
 %>
-<%=t=Config.startPage("parade", pageContext)%>
+<%t=Config.startPage("parade", pageContext);%><%=t%>
 <% // reload check
 if(t==null) return;
 if(t.length()>0)out.println("<br>");
