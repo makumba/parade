@@ -46,12 +46,16 @@ public class CvsManager {
             throw new RuntimeException(ioe.getMessage());
         }
 
-        if (!s.startsWith(":pserver"))
-            row.put("cvs.user", "non :pserver");
-        else {
-            s = s.substring(":pserver:".length());
+        if (s.startsWith(":pserver")) {
+        	s = s.substring(":pserver:".length());
             row.put("cvs.user", s.substring(0, s.indexOf("@")));
         }
+        else if (s.startsWith(":extssh:")) {
+        	s = s.substring(":extssh:".length());
+            row.put("cvs.user", s.substring(0, s.indexOf("@")));
+        }
+        else
+        	row.put("cvs.user", "non :pserver");
 
         try {
             s = new BufferedReader(new FileReader(path + File.separator + "CVS"
