@@ -59,7 +59,10 @@ public class LocalRowStore {
                         .getRequest()).getContextPath();
 
                 state.put(contextPath, Config.paradeBase);
-                state.save(new FileOutputStream(stateFile), "rows");
+                state.save(new FileOutputStream(stateFile), "rows " +
+                		"example " +
+                		" rowdata.<name_appl>.obs=<space for notes> " +
+                		" <name_appl>=<path, e.g. ..\\iplabWeb ");
             }
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
