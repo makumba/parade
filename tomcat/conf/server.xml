@@ -53,11 +53,11 @@ port="8080"               maxThreads="150" minSpareThreads="5" maxSpareThreads="
       <!-- Define the default virtual host
            Note: XML Schema validation will not work with Xerces 2.2.
        -->
-      <Host name="localhost" debug="0" appBase="../webapps_dummy"
+      <Host name="localhost" debug="0" appBase="webapps_dummy"
        unpackWARs="true" autoDeploy="true"
        xmlValidation="false" xmlNamespaceAware="false">
 
-	<Context path="" docBase="../webapp" debug="0" reload="true"/>
+	<Context path="" docBase="../../webapp" debug="0" reload="true"/>
 
     <Context path="/manager" docBase="${catalina.home}/server/webapps/manager"
            debug="0" privileged="true">

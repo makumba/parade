@@ -195,7 +195,7 @@ it's work in progress, see org.makumba.parade.CvsJCVSTest -->
 				 toFile="webapp/WEB-INF/classes/MakumbaDatabase.properties" />
 		<copy file="tomcat/conf/tomcat-users.xml.example"
 				 toFile="tomcat/conf/tomcat-users.xml" />
-		<mkdir dir="webapps_dummy"/>
+		<mkdir dir="tomcat/webapps_dummy"/>
 	</target>
 
 
