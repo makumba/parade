@@ -6,7 +6,7 @@ try{
 String t;
 String commandDomain="parade";
 %>
-<%=t=Config.startPage(commandDomain, pageContext)%>
+<%t=Config.startPage(commandDomain, pageContext);%><%=t%>
 <%
 // reload check
 if(t==null) return;

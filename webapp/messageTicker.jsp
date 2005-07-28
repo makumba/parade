@@ -35,6 +35,9 @@ send message to <c:out value="${param.to}" />
 <b><c:out value="${sessionScope['org.makumba.parade.user']}"/>
 </b>
 <c:choose>
+
+<%
+/*
 <c:when test="${param.to1!=null}" >
   <c:out value="to ${param.to1}"/>
 </c:when>
@@ -43,6 +46,8 @@ send message to <c:out value="${param.to}" />
 : "<i><c:out value="${param.msg}"/></i>",
 </c:if>
 <jsp:useBean id="random" class="org.makumba.parade.RandomBean"/>
+*/
+%>
 <jsp:setProperty name="random" property="alternative" value="<a href=\"messageTicker.jsp?to=cristi&context=\">cristi</a> is in (root), <a href=\"messageTicker.jsp?to=fred&context=\">fred</a> works on fred-k"/>
 
 <jsp:setProperty name="random" property="alternative" value="<b>fred</b> says \"<i>did you see my latest johnny login?\"</i> <a href=\"messageTicker.jsp?to=cristi&context=\">cristi</a> is in (root), <a href=\"messageTicker.jsp?to=fred&context=\">fred</a> works on fred-k"/>

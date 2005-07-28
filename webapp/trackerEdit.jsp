@@ -3,7 +3,7 @@
 <ajsp:include page="header.jsp?title=Edit page" flush="false"/>
 <% String referer=request.getHeader("Referer"); %>
 <mak:object from="org.makumba.devel.PageInfo p" where="p.page=$page or p=$page" 
-db="<%=org.makumba.parade.Config.getProperty(\"tracker.DB\")%>" >
+db='<%=org.makumba.parade.Config.getProperty("tracker.DB")%>' >
 <h1>Editing info about /<mak:value expr="p.page"/></a></h1>
 
 

@@ -31,7 +31,7 @@ pageContext.setAttribute("parade.row", context, PageContext.REQUEST_SCOPE);
 try{ 
 String t;
 %>
-<font face=courier size=-2><%=t=Config.startPage("files", pageContext)%></font>
+<font face=courier size=-2><%t=Config.startPage("files", pageContext);%><%=t%></font>
 <%
 // reload check
 if(t==null) return;

@@ -11,7 +11,7 @@
 <mak:newForm type="org.makumba.devel.PageInfo"
 	method="POST" action="<%=referer%>"
 	message="registered new file"
-	db="<%=org.makumba.parade.Config.getProperty(\"tracker.DB\")%>" >
+	db='<%=org.makumba.parade.Config.getProperty("tracker.DB")%>'>
 <table>
 	<tr><td>Page:<td> http://thisServer/<mak:input
 field="page" size="50" value="$page" dataType="char"/>

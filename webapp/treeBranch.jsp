@@ -97,8 +97,8 @@ for(Iterator j=tree.iterator();j.hasNext(); ctr++)
 	*/	
 %>
 <br><font color="#202090"><%=treeRow %><img src="images/tree-leaf.gif" ALIGN="absbottom" valign="absbottom"></font><a href="files.jsp?context=<%=context%>&path=<%=path%>/<%=fname%>" target="directory" 
-<%--onClick="javascript:SwitchFolder('<%=path%>/<%=fname%>');"--%>
-><img src="images/tree-closed.gif" border="0" ALIGN="absbottom" <%--name="<%=path%>/<%=fname%>"--%>><%=fname%></a><% 
+
+><img src="images/tree-closed.gif" border="0" ALIGN="absbottom"><%=fname%></a><% 
 String subDir=path+'/'+fname;
 	if(level<50) { //prevent infinite depth (because of symlinks)
 %><jsp:include page="treeBranch.jsp">

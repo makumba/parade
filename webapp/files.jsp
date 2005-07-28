@@ -41,7 +41,7 @@ for(Iterator cols=Config.getColumns("files.responseHeaders"); cols.hasNext(); ){
 try{ 
 String t;
 %>
-<%=t=Config.startPage(commandDomain, pageContext)%>
+<%t=Config.startPage(commandDomain, pageContext);%><%=t%>
 <%
 // reload check
 if(t==null) return;

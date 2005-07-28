@@ -1,7 +1,8 @@
 <%-- $Header$ --%>
 <%String x; 
 Integer i=(Integer)pageContext.findAttribute("servletContext.status");
-%><td><a href="browse.jsp?context=<%=x=(String)pageContext.findAttribute("parade.row")%>" ><jsp:include flush="false" page="nameNormalized.jsp"/></a> 
+x=(String)pageContext.findAttribute("parade.row");
+%><td><a href="browse.jsp?context=<%=x%>" ><jsp:include flush="false" page="nameNormalized.jsp"/></a> 
 <% if(i!=null)
    if(i.intValue()==org.makumba.parade.ServletContainer.RUNNING)
 { %>
@@ -12,4 +13,4 @@ Integer i=(Integer)pageContext.findAttribute("servletContext.status");
 <% } else{ %>
 (press "start" to surf)
 <%} %>
-[ <a href=/servlet/log?context=<%=x=(String)pageContext.findAttribute("parade.row")%>>log</a>]
+[ <a href=/servlet/log?context=<%=(String)pageContext.findAttribute("parade.row")%>>log</a>]

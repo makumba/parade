@@ -49,7 +49,7 @@ Server software: <%=pageContext.getServletContext().getServerInfo() %><br>
    while ( enprop.hasMoreElements() ) 
    {  String key = (String) enprop.nextElement() ; 
       line=line+1; %> 
-<tr bgcolor="#<%if(line%2==0){%>eeeeee<%}else{%>ffffff<%}%>">
+<tr bgcolor=<%="\""%>#<% if(line%2==0){%>eeeeee<%}else{%>ffffff<%}%>>
 <td valign="top"><%=key%>:&nbsp;<td><pre><%=key.endsWith("path")?sysprops.getProperty(key).replace(sysprops.getProperty("path.separator").charAt(0),'\n'):(((String)sysprops.getProperty(key)).startsWith("http://"))?"<a href="+sysprops.getProperty(key)+">"+sysprops.getProperty(key)+"</a>":sysprops.getProperty(key)%></tr>
 <% } %>
 </table>
