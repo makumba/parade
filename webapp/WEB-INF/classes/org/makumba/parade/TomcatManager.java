@@ -107,7 +107,7 @@ public class TomcatManager implements ServletContainer {
             if (!f.exists())
                 throw new RuntimeException("cannot find common root to context");
             String s = makeAccess("install?path=" + contextName + "&war=file:"
-                    + Config.paradeBaseRelativeToTomcatWebapps + File.separator
+                    //+ Config.paradeBaseRelativeToTomcatWebapps + File.separator
                     + dir + context.substring(canDir.length()));
             if (s.startsWith("OK")) {
                 servletContextCache.put(contextName, new Integer(RUNNING));
