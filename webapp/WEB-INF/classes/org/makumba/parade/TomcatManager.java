@@ -1,6 +1,10 @@
 package org.makumba.parade;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
@@ -96,7 +100,8 @@ public class TomcatManager implements ServletContainer {
         if (getContextStatus(contextName) != NOT_INSTALLED)
             return "context " + contextName + " already installed";
         try {
-            String dir = ".";
+        	
+        	String dir = ".";
             String context = new File(contextPath).getCanonicalPath();
             String canDir = null;
             File f;
@@ -106,26 +111,42 @@ public class TomcatManager implements ServletContainer {
 
             if (!f.exists())
                 throw new RuntimeException("cannot find common root to context");
-            String s = makeAccess("install?path=" + contextName + "&war=file:"
-                    //+ Config.paradeBaseRelativeToTomcatWebapps + File.separator
-                    + dir + context.substring(canDir.length()));
-            if (s.startsWith("OK")) {
-                servletContextCache.put(contextName, new Integer(RUNNING));
-                String s1 = stopContext(contextName);
-                if (s1.startsWith("OK"))
-                    s += "<br>" + startContext(contextName);
-                else {
-                    s += "<br>Attempting to stop and start " + contextName
-                            + " for checking correct installation failed "
-                            + pleaseCheck(s1);
-                    servletContextCache.put(contextName, new Integer(STOPPED));
-                }
-            }
+            
+            String absoluteContextPath = context;
+            if(new File("tomcat/conf/Catalina/localhost").mkdirs()) {
 
-            return s;
+                //creation of the context file
+                BufferedWriter out = new BufferedWriter(new FileWriter("tomcat/conf/Catalina/localhost"+contextName));
+            	out.write("<Context path=\"/"+contextName+"\" docBase=\""
+            			+ absoluteContextPath+"\" reload=\"true\" debug=\"0\"></Context>");
+            	out.flush();
+            	out.close();
+            	
+            	File deployer = new File("tomcat/conf/Catalina/localhost"+contextName);
+            	System.out.println("make access on +deploy?config=file:/"+deployer.getAbsolutePath()+"&path="+contextName);
+            	
+            	String s = makeAccess("deploy?config=file:/"+deployer.getAbsolutePath()+"&path="+contextName);
+            	if (s.startsWith("OK")) {
+                    servletContextCache.put(contextName, new Integer(RUNNING));
+                    String s1 = stopContext(contextName);
+                    if (s1.startsWith("OK"))
+                        s += "<br>" + startContext(contextName);
+                    else {
+                        s += "<br>Attempting to stop and start " + contextName
+                                + " for checking correct installation failed "
+                                + pleaseCheck(s1);
+                        servletContextCache.put(contextName, new Integer(STOPPED));
+                    }
+                }
+            	
+                return s;
+            }
+            else return "Could not create context file for context "+contextName;
+            
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
         }
+        
     }
 
     public synchronized String unInstallContext(String contextName) {
