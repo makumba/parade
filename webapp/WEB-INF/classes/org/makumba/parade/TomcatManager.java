@@ -112,37 +112,39 @@ public class TomcatManager implements ServletContainer {
             if (!f.exists())
                 throw new RuntimeException("cannot find common root to context");
             
-            String absoluteContextPath = context;
-            if(new File("tomcat/conf/Catalina/localhost").mkdirs()) {
-
-                //creation of the context file
-                BufferedWriter out = new BufferedWriter(new FileWriter("tomcat/conf/Catalina/localhost"+contextName));
-            	out.write("<Context path=\"/"+contextName+"\" docBase=\""
-            			+ absoluteContextPath+"\" reload=\"true\" debug=\"0\"></Context>");
-            	out.flush();
-            	out.close();
-            	
-            	File deployer = new File("tomcat/conf/Catalina/localhost"+contextName);
-            	System.out.println("make access on +deploy?config=file:/"+deployer.getAbsolutePath()+"&path="+contextName);
-            	
-            	String s = makeAccess("deploy?config=file:/"+deployer.getAbsolutePath()+"&path="+contextName);
-            	if (s.startsWith("OK")) {
-                    servletContextCache.put(contextName, new Integer(RUNNING));
-                    String s1 = stopContext(contextName);
-                    if (s1.startsWith("OK"))
-                        s += "<br>" + startContext(contextName);
-                    else {
-                        s += "<br>Attempting to stop and start " + contextName
-                                + " for checking correct installation failed "
-                                + pleaseCheck(s1);
-                        servletContextCache.put(contextName, new Integer(STOPPED));
-                    }
-                }
-            	
-                return s;
-            }
-            else return "Could not create context file for context "+contextName;
+            File deployer= File.createTempFile("parade-deploy", ".xml");
+            BufferedWriter out = new BufferedWriter(new FileWriter(deployer));
+            out.write("<Context path=\"");
+            out.write(contextName);
+            out.write("\" docBase=\"");
+            out.write(Config.paradeBaseRelativeToTomcatWebapps);
+            out.write(File.separator);
+            out.write(dir);
+            out.write(context.substring(canDir.length()));
+            out.write("\" reload=\"true\" debug=\"0\"></Context>");
+            out.flush();
+            out.close();
             
+            // needed for tomcat > 5.5.7
+            // FIXME: should make sure that the engine and hostname are the same as in tomcat config
+            new File("tomcat/conf/Catalina/localhost".replace('/', File.separatorChar)).mkdirs();
+                        
+        	String s = makeAccess("deploy?config=file:/"+deployer.getAbsolutePath()+"&path="+contextName);
+            deployer.delete();
+            
+        	if (s.startsWith("OK")) {
+                servletContextCache.put(contextName, new Integer(RUNNING));
+                String s1 = stopContext(contextName);
+                if (s1.startsWith("OK"))
+                    s += "<br>" + startContext(contextName);
+                else {
+                    s += "<br>Attempting to stop and start " + contextName
+                            + " for checking correct installation failed "
+                            + pleaseCheck(s1);
+                    servletContextCache.put(contextName, new Integer(STOPPED));
+                }
+            }
+            return s;
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
         }
