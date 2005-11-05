@@ -48,6 +48,15 @@
 </echo>
 	</target>
 
+	<target name="triggerCopy">
+	<copy toDir="trigger/" overwrite="true">
+         <fileset dir="webapp/WEB-INF/classes">
+          <include name="org/makumba/parade/TriggerFilter*.class" />
+          <include name="org/makumba/parade/HttpServletRequestDummy*.class" />
+         </fileset>
+	</copy>
+	</target>
+
 
 	<target name="tomcat" description="start tomcat 5" >
 	<antcall target="compile" />

@@ -4,6 +4,31 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
     version="2.4">
 
+<!-- parade-wide triggers: they are called in all contexts. they cannot be relo\
+aded! -->
+ <filter>
+      <filter-name>trigger</filter-name>
+      <filter-class>org.makumba.parade.TriggerFilter</filter-class>
+      <init-param><param-name>beforeContext</param-name>
+                 <param-value>/</param-value>
+      </init-param>
+      <init-param><param-name>afterContext</param-name>
+                 <param-value>/</param-value>
+      </init-param>
+      <init-param><param-name>beforeServlet</param-name>
+                 <param-value>/servlet/org.makumba.parade.AccessServlet</param-value>
+      </init-param>
+      <init-param><param-name>afterServlet</param-name>
+                 <param-value>/servlet/org.makumba.parade.EndAccessServlet</param-value>
+      </init-param>
+   </filter>
+
+   <filter-mapping>
+     <filter-name>trigger</filter-name>
+     <url-pattern>/*</url-pattern>
+   </filter-mapping>
+
+
   <!-- ======================== Introduction ============================== -->
   <!-- This document defines default values for *all* web applications      -->
   <!-- loaded into this instance of Tomcat.  As each application is         -->

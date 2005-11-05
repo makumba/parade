@@ -119,7 +119,7 @@ public class TomcatManager implements ServletContainer {
             out.write(File.separator);
             out.write(dir);
             out.write(context.substring(canDir.length()));
-            out.write("\" reload=\"true\" debug=\"0\"></Context>");
+            out.write("\" reload=\"true\" debug=\"0\" crossContext=\"true\"></Context>");
             out.flush();
             out.close();
             
