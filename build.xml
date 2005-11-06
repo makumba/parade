@@ -49,10 +49,10 @@
 	</target>
 
 	<target name="triggerCopy">
-	<copy toDir="trigger/" overwrite="true">
+	<copy toDir="triggerClasses/" overwrite="true">
          <fileset dir="webapp/WEB-INF/classes">
-          <include name="org/makumba/parade/TriggerFilter*.class" />
-          <include name="org/makumba/parade/HttpServletRequestDummy*.class" />
+          <include name="org/makumba/parade/tools/TriggerFilter*.class" />
+          <include name="org/makumba/parade/tools/HttpServletRequestDummy*.class" />
          </fileset>
 	</copy>
 	</target>

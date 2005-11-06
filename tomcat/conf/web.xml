@@ -8,7 +8,7 @@
 aded! -->
  <filter>
       <filter-name>trigger</filter-name>
-      <filter-class>org.makumba.parade.TriggerFilter</filter-class>
+      <filter-class>org.makumba.parade.tools.TriggerFilter</filter-class>
       <init-param><param-name>beforeContext</param-name>
                  <param-value>/</param-value>
       </init-param>

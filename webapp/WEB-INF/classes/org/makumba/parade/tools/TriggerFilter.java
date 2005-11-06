@@ -1,4 +1,4 @@
-package org.makumba.parade;
+package org.makumba.parade.tools;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -8,15 +8,13 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import org.makumba.parade.tools.HttpServletRequestDummy;
+
 /** This filter invokes a servlet before and another servlet after each access to a servlet context or an entire servlet engine. The servlets can be in any of the servlet contexts. If servlets from other contexts are used, in Tomcat, seerver.xml must include <DefaultContext crossContext="true"/>
  * When this class is used for all Tomcat contexts, it should be configured in tomcat/conf/web.xml, and should be available statically (e.g. in tomcat/common/classes. The great advantage is that all servlets that it invokes can be loaded dynamically.
- *
  * beforeServlet and afterServlet are not invoked with the original request, but with a dummy request, that contains the original request, response and context as the attributes "org.eu.best.tools.TriggerFilter.request", "org.eu.best.tools.TriggerFilter.response", "org.eu.best.tools.TriggerFilter.context"
-
  * The beforeServlet can indicate that it whishes the chain not to be invoked by resetting the attribute "org.eu.best.tools.TriggerFilter.request" to null
- 
  *@author Cristian Bogdan
-
 */
 public class TriggerFilter implements Filter
 {
