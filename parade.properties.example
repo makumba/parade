@@ -28,6 +28,12 @@ tomcat.manager.user=someuser
 tomcat.manager.pass=somepass
 tomcat.output=tomcat/logs/server-output.txt
 
+#------------------ parade authorizer
+#uncomment for authorization:
+#parade.authorizerClass=org.eu.best.BestMemberAuthorizer
+parade.authorizationMessage=Parade, use password of your BEST private area account
+parade.authorizationDB=localhost_mysql_karamba
+
 #------------------ parade buildup -----------------------
 # note: when you change this file, you have to reload parade from its 
 # interface. if things screw up so much that you don't have any interface, 
@@ -56,11 +62,6 @@ tomcat.output=tomcat/logs/server-output.txt
 # in this case, the manager cannot add new rows in the data, and the method 
 # is invoked for every row of data produced by other managers. 
 # see CvsManager.setParadeSimple(), FileManager.setParadeSimple, etc
-
-parade.authorizerClass=org.eu.best.BestMemberAuthorizer
-parade.authorizationMessage=Parade, use password of your BEST private area account
-parade.authorizationDB=localhost_mysql_karamba
-
 
 # and now, the managers for Parade:
 parade.managers=org.makumba.parade.LocalRowStore, org.makumba.parade.FileManager, org.makumba.parade.CvsManager, org.makumba.parade.ServletContextManager, org.makumba.parade.AntManager, org.makumba.parade.MakumbaManager
